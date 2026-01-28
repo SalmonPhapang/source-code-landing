@@ -2,6 +2,7 @@
 'use client';
 
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, CheckCircle2, Code2, Globe, Layers, Layout, Smartphone, ShieldCheck, Zap, Terminal, ChevronRight, Search, PenTool, Rocket } from "lucide-react";
 import { useState } from "react";
 import ContactModal from "@/components/ContactModal";
@@ -381,7 +382,13 @@ export default function LandingPage() {
           </div>
           
           <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-500 text-sm">© 2024 Source Code Development. All rights reserved.</p>
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+              <p className="text-gray-500 text-sm">© 2024 Source Code Development. All rights reserved.</p>
+              <div className="flex gap-6 text-sm">
+                <Link href="/privacy" className="text-gray-500 hover:text-brand-600 transition-colors">Privacy Policy</Link>
+                <Link href="/terms" className="text-gray-500 hover:text-brand-600 transition-colors">Terms of Service</Link>
+              </div>
+            </div>
             <div className="flex space-x-6 mt-4 md:mt-0">
               {/* Social icons would go here */}
             </div>
