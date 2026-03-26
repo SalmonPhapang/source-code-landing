@@ -44,13 +44,14 @@ export async function submitLead(formData: FormData) {
     if (resendApiKey) {
       const resend = new Resend(resendApiKey);
       await resend.emails.send({
-        from: 'Source Code Development <onboarding@resend.dev>', // Update with verified domain
+        from: 'Source Code Development <info@sourcecodes.co.za>', // Update with verified domain
         to: email,
         subject: 'We received your project request',
         html: `
           <h1>Hi ${name},</h1>
           <p>Thanks for reaching out about your <strong>${projectType}</strong> project.</p>
           <p>We've received your details and our team will review them shortly.</p>
+          <p>If you have any urgent questions, feel free to call us at 072 541 3028.</p>
           <p>Best,<br/>Source Code Development Team</p>
         `
       });

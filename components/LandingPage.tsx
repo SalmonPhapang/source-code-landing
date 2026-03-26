@@ -2,9 +2,10 @@
 'use client';
 
 import Image from "next/image";
-import { ArrowRight, CheckCircle2, Code2, Globe, Layers, Layout, Smartphone, ShieldCheck, Zap, Terminal, ChevronRight, Search, PenTool, Rocket } from "lucide-react";
+import { ArrowRight, CheckCircle2, Code2, Globe, Layers, Layout, Smartphone, ShieldCheck, Zap, ChevronRight, Search, PenTool, Rocket, Mail, Phone, MapPin } from "lucide-react";
 import { useState } from "react";
 import ContactModal from "@/components/ContactModal";
+import Link from "next/link";
 
 export default function LandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +29,7 @@ export default function LandingPage() {
               </span>
             </div>
             <div className="hidden md:flex space-x-10">
-              {['Services', 'Process', 'Why Us'].map((item) => (
+              {['Services', 'Portfolio', 'Process', 'Pricing', 'Why Us'].map((item) => (
                 <a 
                   key={item} 
                   href={`#${item.toLowerCase().replace(' ', '-')}`} 
@@ -168,6 +169,62 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Portfolio Section */}
+      <section id="portfolio" className="py-24 bg-white relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-brand-600 font-semibold tracking-wide uppercase mb-3">Our Work</h2>
+            <h3 className="text-4xl font-bold text-gray-900 mb-4">Proven Results for Visionary Brands</h3>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              A selection of our latest projects across web, mobile, and custom applications.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {[
+              {
+                title: "Queless",
+                category: "Mobile App",
+                desc: "A revolutionary mobile delivery service specifically designed for small and informal traders in townships, bridging the gap in logistics.",
+                tags: ["React Native", "Logistics", "Traders"],
+                icon: Smartphone
+              },
+              {
+                title: "Cartique",
+                category: "Mobile App",
+                desc: "The ultimate car maintenance app. Book services, search for genuine car parts, and manage your vehicle's health in one place.",
+                tags: ["React Native", "E-commerce", "Automotive"],
+                icon: Smartphone
+              }
+            ].map((project, idx) => (
+              <div key={idx} className="group relative bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300">
+                <div className="aspect-video bg-dark-900 flex items-center justify-center p-12 group-hover:scale-105 transition-transform duration-500">
+                   <project.icon className="w-16 h-16 text-brand-400 opacity-20" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 to-transparent flex items-end p-8">
+                     <div>
+                       <span className="text-brand-400 text-sm font-semibold uppercase tracking-wider">{project.category}</span>
+                       <h4 className="text-2xl font-bold text-white mt-2">{project.title}</h4>
+                     </div>
+                   </div>
+                </div>
+                <div className="p-8">
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    {project.desc}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag, i) => (
+                      <span key={i} className="px-3 py-1 bg-white border border-gray-200 text-gray-600 text-xs font-medium rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Process Section */}
       <section id="process" className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -280,6 +337,68 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="py-24 bg-gray-50 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-brand-600 font-semibold tracking-wide uppercase mb-3">Transparent Pricing</h2>
+            <h3 className="text-4xl font-bold text-gray-900 mb-4">Investment Built for Success</h3>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Choose the path that fits your current needs, from MVP to enterprise-scale solutions.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Launchpad",
+                price: "Starts at R10,000",
+                desc: "Perfect for MVPs and startups looking to validate their product with core features.",
+                features: ["Single Core Feature", "Standard Design", "30-Day Support", "Deployment Ready"]
+              },
+              {
+                title: "Growth",
+                price: "Starts at R35,000",
+                desc: "Comprehensive solutions for growing businesses that need custom workflows and scalability.",
+                features: ["Multiple Complex Features", "Premium Custom Design", "60-Day Priority Support", "Performance Optimization"],
+                popular: true
+              },
+              {
+                title: "Enterprise",
+                price: "Custom Quote",
+                desc: "Full-scale digital transformation with enterprise-grade security and 24/7 dedicated support.",
+                features: ["Unlimited Features", "Advanced Security", "Lifetime Maintenance", "Dedicated Team"]
+              }
+            ].map((plan, idx) => (
+              <div key={idx} className={`relative p-10 bg-white rounded-3xl border ${plan.popular ? 'border-brand-600 ring-4 ring-brand-50 shadow-xl' : 'border-gray-100 shadow-sm'} hover:shadow-lg transition-all duration-300`}>
+                {plan.popular && (
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-600 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+                    Most Popular
+                  </div>
+                )}
+                <h4 className="text-2xl font-bold text-gray-900 mb-2">{plan.title}</h4>
+                <div className="text-3xl font-extrabold text-brand-600 mb-6">{plan.price}</div>
+                <p className="text-gray-500 mb-10 text-sm leading-relaxed">{plan.desc}</p>
+                <ul className="space-y-4 mb-10">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-brand-600 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm font-medium">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button 
+                  onClick={openModal}
+                  className={`w-full py-4 rounded-xl font-bold text-sm transition-all ${plan.popular ? 'bg-brand-600 text-white hover:bg-brand-700 shadow-lg shadow-brand-500/20' : 'bg-gray-900 text-white hover:bg-gray-800'}`}
+                >
+                  Choose {plan.title}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Why Us Section */}
       <section id="why-us" className="py-24 bg-dark-900 text-white relative overflow-hidden">
         {/* Abstract Background */}
@@ -363,25 +482,40 @@ export default function LandingPage() {
             <div>
               <h4 className="font-bold text-gray-900 mb-6">Services</h4>
               <ul className="space-y-4 text-gray-600">
-                <li><a href="#" className="hover:text-brand-600 transition-colors">Custom Websites</a></li>
-                <li><a href="#" className="hover:text-brand-600 transition-colors">Mobile Apps</a></li>
-                <li><a href="#" className="hover:text-brand-600 transition-colors">Web Applications</a></li>
+                <li><a href="#services" className="hover:text-brand-600 transition-colors">Custom Websites</a></li>
+                <li><a href="#services" className="hover:text-brand-600 transition-colors">Mobile Apps</a></li>
+                <li><a href="#services" className="hover:text-brand-600 transition-colors">Web Applications</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-gray-900 mb-6">Company</h4>
+              <h4 className="font-bold text-gray-900 mb-6">Legal</h4>
               <ul className="space-y-4 text-gray-600">
-                <li><a href="#" className="hover:text-brand-600 transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-brand-600 transition-colors">Process</a></li>
-                <li>
-                  <button onClick={openModal} className="hover:text-brand-600 transition-colors">Contact</button>
+                <li><Link href="/terms" className="hover:text-brand-600 transition-colors">Terms of Use</Link></li>
+                <li><Link href="/privacy" className="hover:text-brand-600 transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/refund" className="hover:text-brand-600 transition-colors">Refund Policy</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-gray-900 mb-6">Contact Us</h4>
+              <ul className="space-y-4 text-gray-600">
+                <li className="flex items-center gap-3">
+                  <Mail className="w-4 h-4 text-brand-600" />
+                  <span className="text-sm">info@sourcecodes.co.za</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone className="w-4 h-4 text-brand-600" />
+                  <span className="text-sm">072 541 3028</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <MapPin className="w-4 h-4 text-brand-600" />
+                  <span className="text-sm text-balance">11740 sekwati street,zone7a sebokeng 1983</span>
                 </li>
               </ul>
             </div>
           </div>
           
           <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-500 text-sm">© 2024 Source Code Development. All rights reserved.</p>
+            <p className="text-gray-500 text-sm">© 2026 Source Code Development. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               {/* Social icons would go here */}
             </div>
