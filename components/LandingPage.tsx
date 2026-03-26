@@ -352,7 +352,7 @@ export default function LandingPage() {
             {[
               {
                 title: "Launchpad",
-                price: "Starts at R10,000",
+                price: "Starts at R15,000",
                 desc: "Perfect for MVPs and startups looking to validate their product with core features.",
                 features: ["Single Core Feature", "Standard Design", "30-Day Support", "Deployment Ready"]
               },
